@@ -11,6 +11,9 @@ import {
   View,
 } from 'react-native';
 import { NativeRouter, Route, Switch, Link } from 'react-router-native';
+import { Provider } from 'react-redux';
+
+import createStore from './src/redux/createStore';
 import Home from './src/containers/Home';
 import About from './src/containers/About';
 
@@ -33,24 +36,28 @@ const styles = StyleSheet.create({
   },
 });
 
-const App = () => (
-  <NativeRouter>
-    <View style={styles.container}>
-      <Text>xxxx</Text>
-      <Link to="/">
-        <Text>Home</Text>
-      </Link>
-      <Link to="/about">
-        <Text>About</Text>
-      </Link>
-      <Text>-----------------</Text>
+const store = createStore();
 
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={About} />
-      </Switch>
-    </View>
-  </NativeRouter>
+const App = () => (
+  <Provider store={store}>
+    <NativeRouter>
+      <View style={styles.container}>
+        <Text>xxxx</Text>
+        <Link to="/">
+          <Text>Home</Text>
+        </Link>
+        <Link to="/about">
+          <Text>About</Text>
+        </Link>
+        <Text>-----------------</Text>
+
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+        </Switch>
+      </View>
+    </NativeRouter>
+  </Provider>
 );
 
 export default App;
