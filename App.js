@@ -6,18 +6,13 @@
 
 import React from 'react';
 import {
-  Platform,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import { NativeRouter, Route, Switch, Link } from 'react-router-native';
+import Home from './src/containers/Home';
+import About from './src/containers/About';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,17 +34,23 @@ const styles = StyleSheet.create({
 });
 
 const App = () => (
-  <View style={styles.container}>
-    <Text style={styles.welcome}>
-      Welcome to React Native!
-    </Text>
-    <Text style={styles.instructions}>
-      To get started, edit App.js
-    </Text>
-    <Text style={styles.instructions}>
-      {instructions}
-    </Text>
-  </View>
+  <NativeRouter>
+    <View style={styles.container}>
+      <Text>xxxx</Text>
+      <Link to="/">
+        <Text>Home</Text>
+      </Link>
+      <Link to="/about">
+        <Text>About</Text>
+      </Link>
+      <Text>-----------------</Text>
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+      </Switch>
+    </View>
+  </NativeRouter>
 );
 
 export default App;
