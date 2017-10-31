@@ -4,14 +4,6 @@ import { Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { app, home } from '../redux/modules/';
 
-// const Home = props => (
-//   <View>
-//     <Text>Home</Text>
-//     <Text>{props.message}</Text>
-//     <Button title="say hi" onPress={() => props.sayHi('John')} />
-//     <Button title="say hello" onPress={() => props.sayHello()} />
-//   </View>
-// );
 class Home extends Component {
   componentDidMount() {
     this.props.loadData();
