@@ -1,63 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import { NativeRouter, Route, Switch, Link } from 'react-router-native';
-import { Provider } from 'react-redux';
+import PropTypes from 'prop-types';
+import { View, Text, Button } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-import createStore from './src/redux/createStore';
-import Home from './src/containers/Home';
-import About from './src/containers/About';
+const HomeScreen = ({ navigation }) => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Home Screen</Text>
+    <Button
+      onPress={() => navigation.navigate('Details')}
+      title="Go to details"
+    />
+  </View>
+);
+HomeScreen.propTypes = {
+  navigation: PropTypes.node.isRequired,
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+const DetailsScreen = () => (
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <Text>Details Screen</Text>
+  </View>
+);
+
+const RootNavigator = StackNavigator({
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: {
+      headerTitle: 'Home',
+    },
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  Details: {
+    screen: DetailsScreen,
+    navigationOptions: {
+      headerTitle: 'Details',
+    },
   },
 });
 
-const store = createStore();
-
-const App = () => (
-  <Provider store={store}>
-    <NativeRouter>
-      <View style={styles.container}>
-        <Text>xxxx</Text>
-        <Link to="/">
-          <Text>Home</Text>
-        </Link>
-        <Link to="/about">
-          <Text>About</Text>
-        </Link>
-        <Text>-----------------</Text>
-
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-        </Switch>
-      </View>
-    </NativeRouter>
-  </Provider>
-);
-
-export default App;
+export default RootNavigator;
