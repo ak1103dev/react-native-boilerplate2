@@ -1,40 +1,62 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { View, Text, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { Text, View, Button } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
-const HomeScreen = ({ navigation }) => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Home Screen</Text>
+const RecentChatsScreen = ({ navigation }) => (
+  <View>
+    <Text>List of recent chats</Text>
     <Button
-      onPress={() => navigation.navigate('Details')}
-      title="Go to details"
+      onPress={() => navigation.navigate('Chat', { user: 'Lucy' })}
+      title="Chat with Lucy"
     />
   </View>
 );
-HomeScreen.propTypes = {
+RecentChatsScreen.propTypes = {
   navigation: PropTypes.node.isRequired,
 };
 
-const DetailsScreen = () => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Details Screen</Text>
+const AllContactsScreen = ({ navigation }) => (
+  <View>
+    <Text>List of all contacts</Text>
+    <Button
+      onPress={() => navigation.navigate('Chat', { user: 'Lucy' })}
+      title="Chat with Lucy"
+    />
+  </View>
+);
+AllContactsScreen.propTypes = {
+  navigation: PropTypes.node.isRequired,
+};
+
+const MainScreenNavigator = TabNavigator({
+  Recent: { screen: RecentChatsScreen },
+  All: { screen: AllContactsScreen },
+});
+
+const ChatScreen = () => (
+  <View>
+    <Text>Chat with Lucy</Text>
   </View>
 );
 
-const RootNavigator = StackNavigator({
+export const SimpleApp = StackNavigator({
   Home: {
-    screen: HomeScreen,
+    screen: MainScreenNavigator,
     navigationOptions: {
-      headerTitle: 'Home',
+      headerTitle: 'Welcome',
     },
   },
-  Details: {
-    screen: DetailsScreen,
+  Chat: {
+    screen: ChatScreen,
     navigationOptions: {
-      headerTitle: 'Details',
+      headerTitle: 'Chat with Lucy',
     },
   },
 });
 
-export default RootNavigator;
+const App = () => (
+  <SimpleApp />
+);
+
+export default App;
