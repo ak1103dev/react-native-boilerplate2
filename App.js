@@ -1,62 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Text, View, Button } from 'react-native';
-import { StackNavigator, TabNavigator } from 'react-navigation';
+// import { StackNavigator, TabNavigator } from 'react-navigation';
+import { StackNavigator } from 'react-navigation';
+import Register from './src/containers/Register';
+import Login from './src/containers/Login';
 
-const RecentChatsScreen = ({ navigation }) => (
-  <View>
-    <Text>List of recent chats</Text>
-    <Button
-      onPress={() => navigation.navigate('Chat', { user: 'Lucy' })}
-      title="Chat with Lucy"
-    />
-  </View>
-);
-RecentChatsScreen.propTypes = {
-  navigation: PropTypes.node.isRequired,
-};
-
-const AllContactsScreen = ({ navigation }) => (
-  <View>
-    <Text>List of all contacts</Text>
-    <Button
-      onPress={() => navigation.navigate('Chat', { user: 'Lucy' })}
-      title="Chat with Lucy"
-    />
-  </View>
-);
-AllContactsScreen.propTypes = {
-  navigation: PropTypes.node.isRequired,
-};
-
-const MainScreenNavigator = TabNavigator({
-  Recent: { screen: RecentChatsScreen },
-  All: { screen: AllContactsScreen },
-});
-
-const ChatScreen = () => (
-  <View>
-    <Text>Chat with Lucy</Text>
-  </View>
-);
-
-export const SimpleApp = StackNavigator({
-  Home: {
-    screen: MainScreenNavigator,
+export const Root = StackNavigator({
+  Index: {
+    screen: Register,
     navigationOptions: {
       headerTitle: 'Welcome',
     },
   },
-  Chat: {
-    screen: ChatScreen,
+  Login: {
+    screen: Login,
     navigationOptions: {
-      headerTitle: 'Chat with Lucy',
+      headerTitle: 'Login',
     },
   },
 });
 
 const App = () => (
-  <SimpleApp />
+  <Root />
 );
 
 export default App;
